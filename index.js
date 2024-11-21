@@ -1,13 +1,18 @@
-const fs = require('fs')
 
-const input = process.argv;
+const dbConnect = require('./mongodb')
 
-if(input[2]==='add'){
-    fs.writeFileSync(input[3], input[4])
-}else if(input[2]==='remove'){
-    fs.unlinkSync(input[3])
+// dbConnect().then((resp)=>{
+//     resp.find().toArray().then((data)=>{
+//         console.log(data)
+//     })
+// })
+
+const main = async ()=>{
+    let data = await dbConnect();
+    data = await data.find().toArray();
+    console.log(data)
 }
-else{
-    console.log("invalaid input")
-}
+
+main()
+
 
